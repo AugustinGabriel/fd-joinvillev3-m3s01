@@ -3,6 +3,7 @@ package br.futurodev.joinville.m3s01.services;
 import br.futurodev.joinville.m3s01.dtos.AuthorRequestDto;
 import br.futurodev.joinville.m3s01.dtos.AuthorResponseDto;
 import br.futurodev.joinville.m3s01.entities.Author;
+import br.futurodev.joinville.m3s01.errors.exceptions.AuthorNotFoundException;
 import br.futurodev.joinville.m3s01.mappers.AuthorMapper;
 import br.futurodev.joinville.m3s01.repositories.AuthorRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,29 +20,40 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public AuthorResponseDto create(AuthorRequestDto dto) {
-        Author entity = mapper.requestToEntity(dto);
+        Author entity = mapper.requestCreateToEntity(dto);
         entity = repository.save(entity);
         return mapper.entityToResponse(entity);
     }
 
     @Override
     public AuthorResponseDto findById(Long id) {
-        return null;
+        return mapper.entityToResponse(findEntityById(id));
     }
 
     @Override
     public List<AuthorResponseDto> findAll() {
-        return List.of();
+        return repository.findAll()
+                .stream().map(mapper::entityToResponse)
+                .toList();
     }
 
     @Override
     public AuthorResponseDto update(Long id, AuthorRequestDto dto) {
-        return null;
+        Author entity = findEntityById(id);
+        mapper.requestUpdateToEntity(entity, dto);
+
+        entity = repository.save(entity);
+        return mapper.entityToResponse(entity);
     }
 
     @Override
     public void delete(Long id) {
+        Author entity = findEntityById(id);
+        repository.delete(entity);
+    }
 
+    private Author findEntityById(Long id) {
+        return repository.findById(id).orElseThrow(() -> new AuthorNotFoundException(id));
     }
 
 }

@@ -1,7 +1,9 @@
 package br.futurodev.joinville.m3s01.dtos;
 
+import jakarta.validation.constraints.NotNull;
+
 public record LoanBookRequestDto(
-    Long bookId,
+    @NotNull Long bookId,
     Integer quantity
 ) {
 }

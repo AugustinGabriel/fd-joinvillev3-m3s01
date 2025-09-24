@@ -1,9 +1,12 @@
 package br.futurodev.joinville.m3s01.dtos;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
 public record CustomerRequestDto(
-    String name,
-    String document,
-    String email,
-    String password
+        @NotBlank @Size(max = 150) String name,
+        @Size(max = 50) String document,
+        @NotBlank @Size(max = 255) String email,
+        @NotBlank String password
 ) {
 }
