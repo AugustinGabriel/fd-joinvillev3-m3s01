@@ -14,7 +14,7 @@ public interface AuthorMapper {
     Author requestCreateToEntity(AuthorRequestDto dto);
 
     @Mapping(target = "id", ignore = true)
-    void requestUpdateToEntity(@MappingTarget Author author, AuthorRequestDto dto);
+    void requestUpdateToEntity(@MappingTarget Author entity, AuthorRequestDto dto);
 
     AuthorResponseDto entityToResponse(Author entity);
 
