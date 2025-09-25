@@ -52,7 +52,8 @@ public class AuthorServiceImpl implements AuthorService {
         repository.delete(entity);
     }
 
-    private Author findEntityById(Long id) {
+    @Override
+    public Author findEntityById(Long id) {
         return repository.findById(id).orElseThrow(() -> new AuthorNotFoundException(id));
     }
 

@@ -58,7 +58,8 @@ public class CategoryServiceImpl implements CategoryService {
         repository.delete(entity);
     }
 
-    private Category findEntityById(Long id) {
+    @Override
+    public Category findEntityById(Long id) {
         return repository.findById(id).orElseThrow(() -> new CategoryNotFoundException(id));
     }
 
