@@ -18,7 +18,7 @@ public interface UserMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "password", ignore = true)
-    @Mapping(target = "role", defaultValue = "CUSTOMER")
+    @Mapping(target = "role", constant = "CUSTOMER")
     User requestCreateToEntity(CustomerRequestDto dto);
 
     @Mapping(target = "id", ignore = true)

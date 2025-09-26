@@ -54,8 +54,8 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void delete(Long id) {
         Customer entity = findEntityById(id);
-        userService.delete(entity.getUser().getId());
         repository.delete(entity);
+        userService.delete(entity.getUser().getId());
     }
 
     @Override
