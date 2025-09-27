@@ -4,10 +4,11 @@ import br.futurodev.joinville.m3s01.dtos.CustomerRequestDto;
 import br.futurodev.joinville.m3s01.dtos.UserRequestDto;
 import br.futurodev.joinville.m3s01.dtos.UserResponseDto;
 import br.futurodev.joinville.m3s01.entities.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
 
-public interface UserService {
+public interface UserService extends UserDetailsService {
 
     UserResponseDto create(UserRequestDto dto);
     UserResponseDto findById(Long id);
